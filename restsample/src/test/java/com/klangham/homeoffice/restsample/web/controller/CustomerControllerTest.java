@@ -41,6 +41,8 @@ public class CustomerControllerTest {
 	private static final String DATE_OF_ISSUE_2 = "06/03/2012";
 	private static final BigInteger PASSPORT_NUMBER_1 = new BigInteger("9876");
 	private static final BigInteger PASSPORT_NUMBER_2 = new BigInteger("8765");
+	private static final BigInteger PASSPORT_ID_1 = new BigInteger("65465");
+	private static final BigInteger PASSPORT_ID_2 = new BigInteger("82465");
 
 	@Mock
 	private CustomerServiceImpl customerService;
@@ -59,6 +61,7 @@ public class CustomerControllerTest {
 	@Test
 	public void testAddCustomer() throws Exception {
 		Customer newCustomer = new Customer();
+		newCustomer.setCustomerId(CUSTOMER_ID_1);
 		newCustomer.setFirstName(FIRST_NAME);
 		newCustomer.setLastName(LAST_NAME);
 		newCustomer.setDateOfBirth(DATE_OF_BIRTH);
@@ -74,8 +77,9 @@ public class CustomerControllerTest {
 				.then()
 				.using()
 				.parser("application/json;charset=UTF-8", Parser.JSON)
-				.body("firstName", equalTo(FIRST_NAME), "lastName", equalTo(LAST_NAME), "dateOfBirth",
-						equalTo(DATE_OF_BIRTH), "locOfBirth", equalTo(LOC_OF_BIRTH), "gender", equalTo(GENDER));
+				.body("customerId", equalTo(CUSTOMER_ID_1.intValue()), "firstName", equalTo(FIRST_NAME), "lastName",
+						equalTo(LAST_NAME), "dateOfBirth", equalTo(DATE_OF_BIRTH), "locOfBirth", equalTo(LOC_OF_BIRTH),
+						"gender", equalTo(GENDER));
 	}
 
 	/**
@@ -90,10 +94,12 @@ public class CustomerControllerTest {
 		Passport passport2 = new Passport();
 		passport1.setCustomerId(CUSTOMER_ID_1);
 		passport1.setDateOfIssue(DATE_OF_ISSUE_1);
+		passport1.setPassportId(PASSPORT_ID_1);
 		passport1.setPassportNumber(PASSPORT_NUMBER_1);
 
 		passport2.setCustomerId(CUSTOMER_ID_1);
 		passport2.setDateOfIssue(DATE_OF_ISSUE_2);
+		passport2.setPassportId(PASSPORT_ID_2);
 		passport2.setPassportNumber(PASSPORT_NUMBER_2);
 
 		listOfPassports.add(passport1);
@@ -106,10 +112,12 @@ public class CustomerControllerTest {
 				.then()
 				.using()
 				.parser("application/json;charset=UTF-8", Parser.JSON)
-				.body("[0].customerId", equalTo(CUSTOMER_ID_1.intValue()), "[0].passportNumber",
-						equalTo(PASSPORT_NUMBER_1.intValue()), "[0].dateOfIssue", equalTo(DATE_OF_ISSUE_1))
-				.body("[1].customerId", equalTo(CUSTOMER_ID_1.intValue()), "[1].passportNumber",
-						equalTo(PASSPORT_NUMBER_2.intValue()), "[1].dateOfIssue", equalTo(DATE_OF_ISSUE_2));
+				.body("[0].passportId", equalTo(PASSPORT_ID_1.intValue()), "[0].customerId",
+						equalTo(CUSTOMER_ID_1.intValue()), "[0].passportNumber", equalTo(PASSPORT_NUMBER_1.intValue()),
+						"[0].dateOfIssue", equalTo(DATE_OF_ISSUE_1))
+				.body("[1].passportId", equalTo(PASSPORT_ID_2.intValue()), "[1].customerId",
+						equalTo(CUSTOMER_ID_1.intValue()), "[1].passportNumber", equalTo(PASSPORT_NUMBER_2.intValue()),
+						"[1].dateOfIssue", equalTo(DATE_OF_ISSUE_2));
 	}
 
 	/**
@@ -122,6 +130,7 @@ public class CustomerControllerTest {
 		Passport passport1 = new Passport();
 		passport1.setCustomerId(CUSTOMER_ID_1);
 		passport1.setDateOfIssue(DATE_OF_ISSUE_1);
+		passport1.setPassportId(PASSPORT_ID_1);
 		passport1.setPassportNumber(PASSPORT_NUMBER_1);
 		when(passportService.addPassport(any(Passport.class))).thenReturn(passport1);
 
@@ -132,7 +141,8 @@ public class CustomerControllerTest {
 				.then()
 				.using()
 				.parser("application/json;charset=UTF-8", Parser.JSON)
-				.body("customerId", equalTo(CUSTOMER_ID_1.intValue()), "passportNumber",
-						equalTo(PASSPORT_NUMBER_1.intValue()), "dateOfIssue", equalTo(DATE_OF_ISSUE_1));
+				.body("passportId", equalTo(PASSPORT_ID_1.intValue()), "customerId", equalTo(CUSTOMER_ID_1.intValue()),
+						"passportNumber", equalTo(PASSPORT_NUMBER_1.intValue()), "dateOfIssue",
+						equalTo(DATE_OF_ISSUE_1));
 	}
 }

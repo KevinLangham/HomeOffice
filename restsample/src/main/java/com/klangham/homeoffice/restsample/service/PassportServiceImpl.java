@@ -34,6 +34,7 @@ public class PassportServiceImpl implements PassportService {
 	public Passport addPassport(Passport passportToAdd) {
 		Passport newPassport = new Passport();
 
+		newPassport.setPassportId(new BigInteger("4543"));
 		newPassport.setCustomerId(passportToAdd.getCustomerId());
 		newPassport.setDateOfIssue(new LocalDate().toString(fmt));
 		newPassport.setPassportNumber(passportToAdd.getPassportNumber());
@@ -65,11 +66,13 @@ public class PassportServiceImpl implements PassportService {
 
 		Passport passport1 = new Passport();
 		passport1.setCustomerId(new BigInteger(id));
+		passport1.setPassportId(new BigInteger("2343"));
 		passport1.setDateOfIssue(new LocalDate().minusYears(4).minusMonths(9).minusDays(3).toString(fmt));
 		passport1.setPassportNumber(new BigInteger("123456"));
 
 		Passport passport2 = new Passport();
 		passport2.setCustomerId(new BigInteger(id));
+		passport2.setPassportId(new BigInteger("2345"));
 		passport2.setDateOfIssue(new LocalDate().minusYears(3).minusMonths(1).minusDays(19).toString(fmt));
 		passport2.setPassportNumber(new BigInteger("12342334"));
 

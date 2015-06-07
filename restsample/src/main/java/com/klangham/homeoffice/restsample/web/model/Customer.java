@@ -3,13 +3,15 @@
  */
 package com.klangham.homeoffice.restsample.web.model;
 
-import java.util.ArrayList;
+import java.math.BigInteger;
 
 /**
  * @author klangham
  *
  */
 public class Customer {
+	private BigInteger customerId;
+	
 	private String firstName;
 	
 	private String lastName;
@@ -20,6 +22,20 @@ public class Customer {
 	
 	private String gender;
 	
+	/**
+	 * @return the customerId
+	 */
+	public BigInteger getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * @param customerId the customerId to set
+	 */
+	public void setCustomerId(BigInteger customerId) {
+		this.customerId = customerId;
+	}
+
 	/**
 	 * @return the firstName
 	 */

@@ -11,11 +11,27 @@ import java.math.BigInteger;
  */
 public class Passport {
 	
+	private BigInteger passportId;
+
 	private BigInteger customerId;
 	
 	private BigInteger passportNumber;
 	
 	private String dateOfIssue;
+
+	/**
+	 * @return the passportId
+	 */
+	public BigInteger getPassportId() {
+		return passportId;
+	}
+
+	/**
+	 * @param passportId the passportId to set
+	 */
+	public void setPassportId(BigInteger passportId) {
+		this.passportId = passportId;
+	}
 
 	/**
 	 * @return the customerId

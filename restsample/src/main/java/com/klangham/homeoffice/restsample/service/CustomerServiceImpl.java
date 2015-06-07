@@ -3,6 +3,8 @@
  */
 package com.klangham.homeoffice.restsample.service;
 
+import java.math.BigInteger;
+
 import org.springframework.stereotype.Component;
 
 import com.klangham.homeoffice.restsample.web.model.Customer;
@@ -25,6 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public Customer addCustomer(Customer customerToAdd) {
 		Customer newCustomer = new Customer();
 
+		newCustomer.setCustomerId(new BigInteger("1234"));
 		newCustomer.setFirstName(customerToAdd.getFirstName());
 		newCustomer.setLastName(customerToAdd.getLastName());
 		newCustomer.setDateOfBirth(customerToAdd.getDateOfBirth());
